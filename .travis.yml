@@ -6,4 +6,4 @@ before_install:
   - docker build -t idoko/docker-rex -f Dockerfile.dev .
 
 script:
-  - docker run idoko/docker-rex npm run test -- --coverage
+  - docker run -e CI=true idoko/docker-rex npm run test -- --coverage
