@@ -1,21 +1,17 @@
 sudo: required
 services:
-  - docker
-
+- docker
 before_install:
-  - docker build -t idoko/docker-rex -f Dockerfile.dev .
-
+- docker build -t idoko/docker-rex -f Dockerfile.dev .
 script:
-  - docker run -e CI=true idoko/docker-rex npm run test -- --coverage
-
+- docker run -e CI=true idoko/docker-rex npm run test -- --coverage
 deploy:
   provider: elasticbeanstalk
-  region: "us-east-1"
-  app: "docker-rex"
-  environment: "DockerRex-env"
-  bucket_name: "elasticbeanstalk-us-east-1-245904285270"
-  bucket_path: "docker-rex"
+  access_key_id: AKIATSQIJTZLF57OCAZK
+  secret_access_key:
+    secure: idZT+SXfjudAxObEEg1Ghm7ee1dpPb+iPL+uSI3kMpLy/dNeMkREmkwzpM3RBj9bAzsGZG14HCVA/jqx0AXBXJQ8vKayn92pDgvxEcaf3ROQcIjQJo+EBSfbUHhLLPcOBjX1LBQYuUa6X7NUoTk7zNc6ybArQb1pPmy1g9ZL8wnnMGDJAvm0dr177OMjn8bhYQK0xfEjGUR0IpU8lCP0CwgAZf0E0lNFG4aYeZmoNLXfwCSSZnhpcgSJCkpyGVxDko+NN/zOuEp6rzz+Gr/KKIrhrGdPLQyzsqFL5GP1we10xebH0hD15cLG4Dr+WkHxfMlt67ztOJIo6zVzcS7HM9ZFeYkkJtmL2gMxPtehBDsxkWkuKP/pOUmhgbGxfz4ZyeBSQpKA12DteB/cAx+2PKmQ3eB6MaZQKy+OuoRwRzntnL6yB3+XNIi23IU7In/GJzOIYeNiF50VOKcBxeng5LFPws9aDm6fiCKwY8IzoSXrKwCpQPkGlKulS64yNZ8pOVji9bTPPNdAXMLcV+uDivafKXzoFlNJo2IFT7G9hkGCUtbiMaQ+jxvb0dL2R+hg30jqGSZtC4wPmhtJdkwwma8cWi1dcD5bfG9ncABiooqXdt8wHocWYY07A2UnHs/pvFqT1ks7YeUx0mE2xCLZb0YYqGn+MdvF+Tk8ztc4MXY=
+  region: us-east-1
+  app: docker-rex
+  env: DockerRex-env
   on:
-    branch: master
-  access_key_id: "$AWS_ACCESS_KEY"
-  secret_access_key: "$AWS_SECRET_KEY"
+    repo: idoqo/docker-rex
