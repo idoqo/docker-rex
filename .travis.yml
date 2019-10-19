@@ -13,5 +13,8 @@ deploy:
   region: us-east-1
   app: docker-rex
   env: DockerRex-env
+  bucket_name: "elasticbeanstalk-us-east-1-245904285270"
+  bucket_path: "docker-rex"
   on:
     repo: idoqo/docker-rex
+    branch: master
