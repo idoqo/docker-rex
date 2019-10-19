@@ -7,3 +7,16 @@ before_install:
 
 script:
   - docker run -e CI=true idoko/docker-rex npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "us-east-1"
+  app: "docker-rex"
+  environment: "DockerRex-env"
+  bucket_name: "elasticbeanstalk-us-east-1-245904285270"
+  bucket_path: "docker-rex"
+  on: 
+    branch: master 
+  access_key_id: "$AWS_ACCESS_KEY"
+  secret_access_key: 
+    secure: "$AWS_SECRET_KEY"
